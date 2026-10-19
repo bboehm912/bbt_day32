@@ -38,7 +38,7 @@ body {
 .header-flex { display: flex; justify-content: space-between; align-items: center; }
 .header-left { display: flex; align-items: center; gap: 18px; }
 .logo-box { width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; }
-.logo-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.logo-box strong { color: var(--primary); font-size: 1.45em; letter-spacing: -0.06em; }
 
 .stamp-container { width: 110px; height: 110px; position: relative; }
 .stamp-photo {
@@ -219,18 +219,11 @@ input, textarea, select {
   <div class="header-card">
     <div class="header-flex">
       <div class="header-left">
-        <div class="logo-box">
-          <img src="chisholm_logo.png" alt="Chisholm Logo" onerror="this.style.display='none'" />
-        </div>
+        <div class="logo-box" aria-label="Basic Broadcast Technology"><strong>BBT</strong></div>
         <div>
           <h2>Basic Broadcast Technology</h2>
           <p class="subtitle">Unit 8: Field Production: Filming — Field Production: Gathering B-Roll</p>
         </div>
-      </div>
-
-      <div class="stamp-container">
-        <img class="stamp-photo" src="boehm_photo.jpg" alt="Instructor Photo" onerror="this.style.display='none'" />
-        <img class="stamp-svg" src="boehm-stamp.svg" alt="Classroom Stamp" onerror="this.style.display='none'" />
       </div>
     </div>
   </div>
@@ -270,7 +263,7 @@ input, textarea, select {
   <!-- TAB: RESOURCE HUB -->
   <div id="res-tab" class="card tab-content">
     <h3>Lesson Resource & Reference Hub</h3>
-    <p class="muted">Access official course references below.</p>
+    <p class="muted">Open the included printable guides and templates, or visit the official Minnesota CTE framework page.</p>
     <div id="resource-list">
       <!-- Resources injected by script -->
     </div>
@@ -292,16 +285,6 @@ let currentSlide = 1;
 let totalSlides = 1;
 let bellringers = [];
 
-// Stock image pool for default visual slides
-const stockImagePool = [
-  'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=300&q=80',
-  'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=300&q=80',
-  'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=300&q=80',
-  'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=300&q=80',
-  'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?auto=format&fit=crop&w=300&q=80',
-  'https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=300&q=80'
-];
-
 const iconPool = ['🎥', '📹', '📐', '🎙️', '📜', '🎬'];
 
 function renderSlides(slides) {
@@ -313,16 +296,8 @@ function renderSlides(slides) {
     wrapper.className = 'slide' + (index === 0 ? ' active' : '');
     wrapper.id = `slide-${index + 1}`;
 
-    const imageUrl = slide.image || stockImagePool[index % stockImagePool.length];
     const fallbackEmoji = slide.icon || iconPool[index % iconPool.length];
-
-    const visualMediaHTML = `
-      <img src="${imageUrl}" 
-           alt="${slide.title}" 
-           style="width:110px;height:110px;object-fit:cover;border-radius:50%;border:3px solid var(--primary);" 
-           onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-      <span style="font-size: 2.8em; display: none; margin-bottom: 8px;">${fallbackEmoji}</span>
-    `;
+    const visualMediaHTML = `<span role="img" aria-label="Slide illustration" style="font-size:2.8em;display:block;margin:12px 0;">${fallbackEmoji}</span>`;
 
     wrapper.innerHTML = `
       <div class="slide-header">
@@ -721,9 +696,14 @@ window.addEventListener('DOMContentLoaded', () => initLesson({
     }
   ],
   "resources": {
-    "equipment": ["HD Camcorders / DSLR Rigs", "Tripods with Fluid Heads", "Shotgun Microphones & Deadcats", "Field Shot Logs"],
-    "guides": ["MN CTE Broadcast Standards Manual", "Public vs. Private Filming Legal Guidelines Cheat Sheet"],
-    "media": ["Sample News Package B-Roll Sequence Video Clip (3 mins)", "Stand-Up Framing Graphic Reference"]
+    "buttons": [
+      {"title": "Minnesota CTE Frameworks (Official MDE)", "description": "Official framework landing page; confirm the current framework and exact CTB standard wording.", "url": "https://education.mn.gov/MDE/dse/cte/framework/"},
+      {"title": "Student Field Filming Quick Guide", "description": "Printable guide to location permission, audio, privacy, releases, and safe field practice.", "file": "resources/student-field-filming-quick-guide.html"},
+      {"title": "B-Roll Equipment Checklist", "description": "Generated checkout, field setup, and pack-out checklist.", "file": "resources/b-roll-equipment-checklist.html"},
+      {"title": "Printable B-Roll Shot Log", "description": "Print the blank log; open the CSV in spreadsheet software to record clips digitally.", "file": "resources/b-roll-shot-log.html"},
+      {"title": "B-Roll Shot Log (CSV)", "description": "Spreadsheet-friendly blank template.", "file": "resources/b-roll-shot-log.csv"},
+      {"title": "Shot Framing Graphic Reference", "description": "Generated, offline-friendly Wide / Medium / Tight visual reference.", "file": "resources/b-roll-shot-framing.svg"}
+    ]
   },
   "form": {
     "field_1": {
