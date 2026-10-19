@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 340 340" width="340" height="340">
+  <defs>
+    <!-- Top Arc Path: Sweeps clockwise; text extends outward towards R=142 -->
+    <path id="top-arc" d="M 45,170 A 125,125 0 0,1 295,170" fill="none"/>
+
+    <!-- Bottom Arc Path: Sweeps counter-clockwise; text extends inward towards R=133 -->
+    <path id="bottom-arc" d="M 22,170 A 148,148 0 0,0 318,170" fill="none"/>
+
+    <!-- Circular mask to crop headshot into a perfect center circle -->
+    <clipPath id="circle-clip">
+      <circle cx="170" cy="170" r="82" />
+    </clipPath>
+  </defs>
+
+  <!-- Stamp structure with authentic 4-degree tilt -->
+  <g fill="#15803d" stroke="#15803d" transform="rotate(-4 170 170)">
+    
+    <!-- Outer Heavy Seal Ring -->
+    <circle cx="170" cy="170" r="158" fill="none" stroke-width="5" />
+    
+    <!-- Inner Fine Seal Ring (Spaced generously at r=114) -->
+    <circle cx="170" cy="170" r="114" fill="none" stroke-width="2" />
+
+    <!-- Top Text: ★ THE BOEHM CLASSROOM ★ -->
+    <text font-family="'Arial Black', 'Impact', sans-serif" font-size="16" font-weight="900" letter-spacing="2.2">
+      <textPath href="#top-arc" startOffset="50%" text-anchor="middle" fill="#15803d" stroke="none">
+        ★ THE BOEHM CLASSROOM ★
+      </textPath>
+    </text>
+
+    <!-- Bottom Text: CHISHOLM HIGH SCHOOL (Floating neatly in the track) -->
+    <text font-family="'Arial Black', 'Impact', sans-serif" font-size="14.5" font-weight="900" letter-spacing="3">
+      <textPath href="#bottom-arc" startOffset="50%" text-anchor="middle" fill="#15803d" stroke="none">
+        CHISHOLM HIGH SCHOOL
+      </textPath>
+    </text>
+
+    <!-- Dotted Inner Border Ring -->
+    <circle cx="170" cy="170" r="84" fill="none" stroke-width="2" stroke-dasharray="4,3" />
+
+    <!-- CENTER PHOTO (Cropped into Circle) -->
+    <image href="boehm_photo.jpg" x="88" y="88" width="164" height="164" preserveAspectRatio="xMidYMid slice" clip-path="url(#circle-clip)" />
+
+  </g>
+</svg>
